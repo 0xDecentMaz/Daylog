@@ -3,18 +3,27 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'DBServices.dart';
 
+DBServices dbservices = DBServices();
+
 void main() async {
   runApp(const MyApp());
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  DBServices dbservices = DBServices();
+  // open database connection
   await dbservices.initDB();
 
   Activities activity = const Activities(id: 1, activity: "something");
   dbservices.insertActivity(activity);
 
-  print(await dbservices.activities());
+  //print(await dbservices.activities());
+  setActivityList();
+}
+
+void setActivityList() async {
+  for (var activity in await dbservices.activities()) {
+    print(activity);
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -46,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     'Button 2',
     'Button 3',
   ];
+
   /*int _counter = 0;
 
   void _incrementCounter() {
