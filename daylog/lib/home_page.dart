@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                       debugPrint(activity);
                     },
                     onLongPress: () {
-                      _deleteActivityDialog(id, activity);
+                      _deleteActivityDialog(activity);
                     },
                     child: Text(activity))
               ],
@@ -70,9 +70,9 @@ class _HomePageState extends State<HomePage> {
     _fetchList();
   }
 
-  void _deleteFromList(int id) async {
-    debugPrint('Deleteing Activity id $id');
-    await dbservices.deleteActivity(id);
+  void _deleteFromList(String activity) async {
+    debugPrint('Deleteing Activity: $activity');
+    await dbservices.deleteActivity(activity);
     _fetchList();
   }
 
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> _deleteActivityDialog(int id, String activity) async {
+  Future<void> _deleteActivityDialog(String activity) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
               child: const Text('Delete'),
               onPressed: () {
                 Navigator.of(context).pop();
-                _deleteFromList(id);
+                _deleteFromList(activity);
               },
             ),
           ],

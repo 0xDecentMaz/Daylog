@@ -28,10 +28,10 @@ class DBServices {
         .rawInsert('INSERT INTO activities(activity) VALUES(?)', [activity]);
   }
 
-  Future<void> deleteActivity(int id) async {
+  Future<void> deleteActivity(String activity) async {
     final db = await database;
 
-    await db.rawInsert('DELETE FROM activities WHERE id = ?', [id]);
+    await db.rawInsert('DELETE FROM activities WHERE activity = ?', [activity]);
   }
 
   /*Future<void> oldInsertActivity(Activities activities) async {
