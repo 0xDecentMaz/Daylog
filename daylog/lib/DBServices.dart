@@ -25,7 +25,14 @@ class DBServices {
     //populate list with activity names
   }
 
-  Future<void> insertActivity(Activities activities) async {
+  Future<void> insertActivity(String activity) async {
+    final db = await database;
+
+    await db
+        .rawInsert('INSERT INTO activities(activity) VALUES(?)', [activity]);
+  }
+
+  Future<void> oldInsertActivity(Activities activities) async {
     final db = await database;
 
     await db.insert(

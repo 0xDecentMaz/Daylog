@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
 
   void _addToList() async {
     debugPrint(valueText);
+    await dbservices.insertActivity(valueText);
     //debugPrint('Add new activity');
     _fetchList();
   }

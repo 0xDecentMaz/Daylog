@@ -8,6 +8,8 @@ import 'DBServices.dart';
 DBServices dbservices = DBServices();
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dbservices.initDB();
   runApp(const MyApp());
 }
 
