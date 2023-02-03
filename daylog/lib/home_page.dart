@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   final DBServices dbServices = DBServices();
   List activityList = [];
   String valueText = '';
-  List<Widget> pages = const [HistoryPage(), SettingsPage()];
+  List<Widget> pages = const [HomePage(), HistoryPage(), SettingsPage()];
 
   @override
   void initState() {
@@ -57,17 +57,22 @@ class _HomePageState extends State<HomePage> {
         ),
         bottomNavigationBar: NavigationBar(
           destinations: const [
+            NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
             NavigationDestination(icon: Icon(Icons.home), label: 'History'),
             NavigationDestination(icon: Icon(Icons.person), label: 'Settings'),
           ],
           onDestinationSelected: (int index) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (BuildContext context) {
-                  return pages[index];
-                },
-              ),
-            );
+            if (index != 0) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return pages[index];
+                  },
+                ),
+              );
+            } else {
+              //do nothing since already on homepage
+            }
           },
         ),
       ),
