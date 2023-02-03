@@ -1,4 +1,5 @@
 import 'package:daylog/add_activity_page.dart';
+import 'package:daylog/history_page.dart';
 import 'package:daylog/settings_page.dart';
 import 'package:daylog/main.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   final DBServices dbServices = DBServices();
   List activityList = [];
   String valueText = '';
-  List<Widget> pages = const [AddActivityPage(), SettingsPage()];
+  List<Widget> pages = const [HistoryPage(), SettingsPage()];
 
   @override
   void initState() {
