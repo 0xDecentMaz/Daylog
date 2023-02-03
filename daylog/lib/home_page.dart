@@ -1,4 +1,3 @@
-import 'package:daylog/add_activity_page.dart';
 import 'package:daylog/history_page.dart';
 import 'package:daylog/settings_page.dart';
 import 'package:daylog/main.dart';
