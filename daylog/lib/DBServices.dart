@@ -19,6 +19,10 @@ class DBServices {
       },
       version: 1,
     );
+
+    //get activity count
+    //set list length to count
+    //populate list with activity names
   }
 
   Future<void> insertActivity(Activities activities) async {
@@ -31,14 +35,24 @@ class DBServices {
     );
   }
 
+  Future<List> getActivityList() async {
+    // Get a reference to the database.
+    final db = await database;
+
+    var result = await db.rawQuery('SELECT activity FROM activities');
+
+    // return a list of results without column name
+    return result.map((i) => i["activity"]).toList();
+  }
+
   Future<List<Activities>> activities() async {
     // Get a reference to the database.
     final db = await database;
 
-    // Query the table for all The Dogs.
+    // Query the table for all The activities.
     final List<Map<String, dynamic>> maps = await db.query('activities');
 
-    // Convert the List<Map<String, dynamic> into a List<Dog>.
+    // Convert the List<Map<String, dynamic> into a List<Activities>.
     return List.generate(maps.length, (i) {
       return Activities(
         id: maps[i]['id'],

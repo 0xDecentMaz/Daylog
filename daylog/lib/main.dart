@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:daylog/home_page.dart';
+import 'package:daylog/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'DBServices.dart';
 
@@ -7,23 +9,6 @@ DBServices dbservices = DBServices();
 
 void main() async {
   runApp(const MyApp());
-
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // open database connection
-  await dbservices.initDB();
-
-  Activities activity = const Activities(id: 1, activity: "something");
-  dbservices.insertActivity(activity);
-
-  //print(await dbservices.activities());
-  setActivityList();
-}
-
-void setActivityList() async {
-  for (var activity in await dbservices.activities()) {
-    print(activity);
-  }
 }
 
 class MyApp extends StatelessWidget {
@@ -32,67 +17,76 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Log Test',
+      title: 'Log test',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Main Window'),
+      home: const HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+/*
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.green),
+      home: const RootPage(),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  final List<String> stringValues = [
-    'Button 1',
-    'Button 2',
-    'Button 3',
-  ];
+class RootPage extends StatefulWidget {
+  const RootPage({super.key});
 
-  /*int _counter = 0;
+  @override
+  State<RootPage> createState() => _RootPageState();
+}
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }*/
-
+class _RootPageState extends State<RootPage> {
+  int currentPage = 0;
+  List<Widget> pages = const [HomePage(), SettingsPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Test'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            for (var stringValue in stringValues)
-              TextButton(
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.blue),
-                ),
-                onPressed: () {
-                  print(stringValue);
-                },
-                child: Text(stringValue),
-              )
-          ],
-        ),
-      ),
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+      body: pages[currentPage],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          debugPrint('Add new activity');
+        },
         child: const Icon(Icons.add),
-      ),*/
+      ),
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        selectedIndex: currentPage,
+      ),
     );
   }
 }
+*/
+
+/* MAIN CLASS 
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // open database connection
+  await dbservices.initDB();
+
+  Activities activity = const Activities(id: 1, activity: "something");
+  dbservices.insertActivity(activity);
+*/
