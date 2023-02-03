@@ -1,4 +1,5 @@
 import 'package:daylog/add_activity_page.dart';
+import 'package:daylog/settings_page.dart';
 import 'package:daylog/main.dart';
 import 'package:flutter/material.dart';
 import 'DBServices.dart';
@@ -14,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   final DBServices dbServices = DBServices();
   List activityList = [];
   String valueText = '';
+  List<Widget> pages = const [AddActivityPage(), SettingsPage()];
 
   @override
   void initState() {
@@ -33,7 +35,6 @@ class _HomePageState extends State<HomePage> {
           itemCount: activityList.length,
           itemBuilder: (_, index) {
             var activity = activityList[index];
-            var id = index;
             return Column(
               children: [
                 ElevatedButton(
@@ -53,6 +54,21 @@ class _HomePageState extends State<HomePage> {
             _newActivityDialog();
           },
           child: const Icon(Icons.add),
+        ),
+        bottomNavigationBar: NavigationBar(
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.home), label: 'History'),
+            NavigationDestination(icon: Icon(Icons.person), label: 'Settings'),
+          ],
+          onDestinationSelected: (int index) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) {
+                  return pages[index];
+                },
+              ),
+            );
+          },
         ),
       ),
     );
