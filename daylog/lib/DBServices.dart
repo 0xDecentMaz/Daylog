@@ -19,10 +19,6 @@ class DBServices {
       },
       version: 1,
     );
-
-    //get activity count
-    //set list length to count
-    //populate list with activity names
   }
 
   Future<void> insertActivity(String activity) async {
@@ -32,7 +28,13 @@ class DBServices {
         .rawInsert('INSERT INTO activities(activity) VALUES(?)', [activity]);
   }
 
-  Future<void> oldInsertActivity(Activities activities) async {
+  Future<void> deleteActivity(int id) async {
+    final db = await database;
+
+    await db.rawInsert('DELETE FROM activities WHERE id = ?', [id]);
+  }
+
+  /*Future<void> oldInsertActivity(Activities activities) async {
     final db = await database;
 
     await db.insert(
@@ -40,7 +42,7 @@ class DBServices {
       activities.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-  }
+  }*/
 
   Future<List> getActivityList() async {
     // Get a reference to the database.
@@ -52,7 +54,7 @@ class DBServices {
     return result.map((i) => i["activity"]).toList();
   }
 
-  Future<List<Activities>> activities() async {
+  /*Future<List<Activities>> activities() async {
     // Get a reference to the database.
     final db = await database;
 
@@ -66,7 +68,7 @@ class DBServices {
         activity: maps[i]['activity'],
       );
     });
-  }
+  }*/
 }
 
 class Activities {

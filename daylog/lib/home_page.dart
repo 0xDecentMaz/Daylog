@@ -33,11 +33,15 @@ class _HomePageState extends State<HomePage> {
           itemCount: activityList.length,
           itemBuilder: (_, index) {
             var activity = activityList[index];
+            var id = index;
             return Column(
               children: [
                 ElevatedButton(
                     onPressed: () {
                       debugPrint(activity);
+                    },
+                    onLongPress: () {
+                      _deleteActivityDialog(id, activity);
                     },
                     child: Text(activity))
               ],
@@ -56,16 +60,19 @@ class _HomePageState extends State<HomePage> {
 
   void _fetchList() async {
     final list = await dbservices.getActivityList();
-    //print('All activities retrieved:');
-    //list.forEach(print);
     activityList = list;
     setState(() {});
   }
 
   void _addToList() async {
-    debugPrint(valueText);
+    debugPrint('Creating Activity $valueText');
     await dbservices.insertActivity(valueText);
-    //debugPrint('Add new activity');
+    _fetchList();
+  }
+
+  void _deleteFromList(int id) async {
+    debugPrint('Deleteing Activity id $id');
+    await dbservices.deleteActivity(id);
     _fetchList();
   }
 
@@ -97,6 +104,34 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.of(context).pop();
                 _addToList();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _deleteActivityDialog(int id, String activity) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Activity'),
+          content: SingleChildScrollView(
+            child: Text('Do you want to delete $activity ?'),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context, 'Cancel'),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              child: const Text('Delete'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                _deleteFromList(id);
               },
             ),
           ],
