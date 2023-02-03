@@ -12,7 +12,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('History Page'),
+        title: const Text('Activity History'),
         automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () {

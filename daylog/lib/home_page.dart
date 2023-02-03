@@ -58,8 +58,9 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: NavigationBar(
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Icons.home), label: 'History'),
-            NavigationDestination(icon: Icon(Icons.person), label: 'Settings'),
+            NavigationDestination(icon: Icon(Icons.list), label: 'History'),
+            NavigationDestination(
+                icon: Icon(Icons.settings), label: 'Settings'),
           ],
           onDestinationSelected: (int index) {
             if (index != 0) {
