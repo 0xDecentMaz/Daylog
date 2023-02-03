@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage> {
           child: const Icon(Icons.add),
         ),
         bottomNavigationBar: NavigationBar(
+          //backgroundColor: Colors.lightBlue,
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
             NavigationDestination(icon: Icon(Icons.list), label: 'History'),

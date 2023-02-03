@@ -54,21 +54,22 @@ class DBServices {
     return result.map((i) => i["activity"]).toList();
   }
 
-  /*Future<List<Activities>> activities() async {
+  Future<List<Log>> getActivityLog() async {
     // Get a reference to the database.
     final db = await database;
 
     // Query the table for all The activities.
-    final List<Map<String, dynamic>> maps = await db.query('activities');
+    final List<Map<String, dynamic>> maps = await db.query('log');
 
     // Convert the List<Map<String, dynamic> into a List<Activities>.
     return List.generate(maps.length, (i) {
-      return Activities(
+      return Log(
         id: maps[i]['id'],
         activity: maps[i]['activity'],
+        datetime: maps[i]['datetime'],
       );
     });
-  }*/
+  }
 }
 
 class Activities {
