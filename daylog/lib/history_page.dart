@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'DBServices.dart';
 import 'db_helper.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -36,7 +35,6 @@ class ActivityLogTable extends StatefulWidget {
 }
 
 class _ActivityLogTableState extends State<ActivityLogTable> {
-  //final DBServices dbServices = DBServices();
   DatabaseHelper dbservices = DatabaseHelper.instance;
   List<dynamic> activityLog = [];
 
