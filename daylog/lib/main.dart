@@ -5,11 +5,11 @@ import 'package:daylog/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'DBServices.dart';
 
-DBServices dbservices = DBServices();
+//DBServices dbservices = DBServices();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dbservices.initDB();
+  //await dbservices.initDB();
   runApp(const MyApp());
 }
 

@@ -2,7 +2,9 @@ import 'package:daylog/history_page.dart';
 import 'package:daylog/settings_page.dart';
 import 'package:daylog/main.dart';
 import 'package:flutter/material.dart';
-import 'DBServices.dart';
+import 'package:sqflite/sqflite.dart';
+//import 'DBServices.dart';
+import 'db_helper.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,7 +14,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final DBServices dbServices = DBServices();
+  //final DBServices dbServices = DBServices();
+  DatabaseHelper dbservices = DatabaseHelper.instance;
+
   List activityList = [];
   String valueText = '';
   List<Widget> pages = const [HomePage(), HistoryPage(), SettingsPage()];

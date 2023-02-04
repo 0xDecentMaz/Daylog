@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'DBServices.dart';
+//import 'DBServices.dart';
+import 'db_helper.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -35,7 +36,8 @@ class ActivityLogTable extends StatefulWidget {
 }
 
 class _ActivityLogTableState extends State<ActivityLogTable> {
-  final DBServices dbServices = DBServices();
+  //final DBServices dbServices = DBServices();
+  DatabaseHelper dbservices = DatabaseHelper.instance;
   List<dynamic> activityLog = [];
 
   @override
@@ -86,7 +88,7 @@ class _ActivityLogTableState extends State<ActivityLogTable> {
   }
 
   void _fetchLog() async {
-    final list = await dbServices.getActivityList();
+    final list = await dbservices.getActivityList();
     activityLog = list;
     setState(() {});
   }
