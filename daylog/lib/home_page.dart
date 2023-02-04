@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      debugPrint(activity);
+                      _logActivity(activity);
                     },
                     onLongPress: () {
                       _deleteActivityDialog(activity);
@@ -93,6 +93,14 @@ class _HomePageState extends State<HomePage> {
     debugPrint('Creating Activity $valueText');
     await dbservices.insertActivity(valueText);
     _fetchList();
+  }
+
+  void _logActivity(String activity) async {
+    DateTime now = DateTime.now();
+    String datetime =
+        "${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
+    debugPrint('Log: $activity - $datetime');
+    await dbservices.insertActivityLog(activity, datetime);
   }
 
   void _deleteFromList(String activity) async {

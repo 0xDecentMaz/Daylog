@@ -36,7 +36,7 @@ class ActivityLogTable extends StatefulWidget {
 
 class _ActivityLogTableState extends State<ActivityLogTable> {
   DatabaseHelper dbservices = DatabaseHelper.instance;
-  List<dynamic> activityLog = [];
+  List<Log> activityLog = [];
 
   @override
   void initState() {
@@ -62,24 +62,24 @@ class _ActivityLogTableState extends State<ActivityLogTable> {
     //List<DataRow>
     List<DataRow> rows = [];
 
-    //generate selected user nested data
-    for (var row in activityLog) {
+    for (int i = 0; i < activityLog.length; i++) {
       rows.add(
         DataRow(
           cells: [
             DataCell(
-              Text(row['id'].toString()),
+              Text(activityLog[i].id.toString()),
             ),
             DataCell(
-              Text(row['activity']),
+              Text(activityLog[i].activity.toString()),
             ),
             DataCell(
-              Text(row['datetime'].toString()),
+              Text(activityLog[i].datetime.toString()),
             ),
           ],
         ),
       );
     }
+
     return rows;
   }
 

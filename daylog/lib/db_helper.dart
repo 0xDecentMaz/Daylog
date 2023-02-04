@@ -44,6 +44,13 @@ class DatabaseHelper {
         .rawInsert('INSERT INTO activities(activity) VALUES(?)', [activity]);
   }
 
+  Future<void> insertActivityLog(String activity, String datetime) async {
+    final db = await database;
+
+    await db.rawInsert('INSERT INTO log(activity, datetime) VALUES(?,?)',
+        [activity, datetime]);
+  }
+
   Future<void> deleteActivity(String activity) async {
     final db = await database;
 
