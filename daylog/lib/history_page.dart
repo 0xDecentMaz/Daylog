@@ -47,47 +47,47 @@ class _ActivityLogTableState extends State<ActivityLogTable> {
   @override
   Widget build(BuildContext context) {
     return DataTable(
-      columns: const <DataColumn>[
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'ID',
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'DATETIME',
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-          ),
-        ),
-        DataColumn(
-          label: Expanded(
-            child: Text(
-              'ACTIVITY',
-              style: TextStyle(fontStyle: FontStyle.italic),
-            ),
-          ),
-        ),
-      ],
-      rows: const <DataRow>[
-        DataRow(
-          cells: <DataCell>[
-            DataCell(Text('0')),
-            DataCell(Text('2023-02-02')),
-            DataCell(Text('Pet Cat')),
-          ],
-        ),
-      ],
+      columns: _getColumns(),
+      rows: _getDataRows(),
     );
   }
 
   void _fetchLog() async {
-    final list = await dbservices.getActivityList();
+    final list = await dbservices.getActivityLog();
     activityLog = list;
     setState(() {});
+  }
+
+  List<DataRow> _getDataRows() {
+    //List<DataRow>
+    List<DataRow> rows = [];
+
+    //generate selected user nested data
+    for (var row in activityLog) {
+      rows.add(
+        DataRow(
+          cells: [
+            DataCell(
+              Text(row['id'].toString()),
+            ),
+            DataCell(
+              Text(row['activity']),
+            ),
+            DataCell(
+              Text(row['datetime'].toString()),
+            ),
+          ],
+        ),
+      );
+    }
+    return rows;
+  }
+
+  List<DataColumn> _getColumns() {
+    return const [
+      DataColumn(label: Text('id')),
+      DataColumn(label: Text('activity')),
+      DataColumn(label: Text('datetime'))
+    ];
   }
 }
