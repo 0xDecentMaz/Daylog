@@ -72,7 +72,8 @@ class DatabaseHelper {
     final db = await database;
 
     // Query the table for all The activities.
-    final List<Map<String, dynamic>> maps = await db.query('log');
+    final List<Map<String, dynamic>> maps =
+        await db.rawQuery('SELECT * FROM log ORDER BY id DESC');
 
     // Convert the List<Map<String, dynamic> into a List<Activities>.
     return List.generate(maps.length, (i) {
