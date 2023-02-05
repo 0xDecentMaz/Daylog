@@ -1,8 +1,7 @@
 import 'package:daylog/history_page.dart';
 import 'package:daylog/settings_page.dart';
-import 'package:daylog/main.dart';
+import 'package:daylog/navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 import 'db_helper.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Log Test Home'),
+          title: const Text('Logitall'),
         ),
         body: ListView.builder(
           itemCount: activityList.length,
@@ -57,28 +56,7 @@ class _HomePageState extends State<HomePage> {
           },
           child: const Icon(Icons.add),
         ),
-        bottomNavigationBar: NavigationBar(
-          //backgroundColor: Colors.lightBlue,
-          destinations: const [
-            NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Icons.list), label: 'History'),
-            NavigationDestination(
-                icon: Icon(Icons.settings), label: 'Settings'),
-          ],
-          onDestinationSelected: (int index) {
-            if (index != 0) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) {
-                    return pages[index];
-                  },
-                ),
-              );
-            } else {
-              //do nothing since already on homepage
-            }
-          },
-        ),
+        bottomNavigationBar: const NavBar(),
       ),
     );
   }

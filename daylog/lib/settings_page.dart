@@ -57,7 +57,9 @@ class _ExportWidgetState extends State<ExportWidget> {
   void exportToCSV() async {
     // get permission for external storage
     if (await Permission.manageExternalStorage.request().isGranted) {
+      debugPrint('Start export process');
       await dbservices.exportToCSV();
+      debugPrint('Export completed');
     }
   }
 }
