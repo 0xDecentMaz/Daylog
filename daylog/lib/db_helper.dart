@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:csv/csv.dart';
 
 /*
 Many thanks to user manishdayma on github, it was of great help to read his implementation of 
@@ -83,6 +85,32 @@ class DatabaseHelper {
         datetime: maps[i]['datetime'],
       );
     });
+  }
+
+  Future<void> exportToCSV() async {
+    /*List<List<dynamic>> csvList = [];
+    List<Log> dbList = await getActivityLog();
+
+    for (int i = 0; i < dbList.length; i++) {
+      List<String> list = [];
+
+      list.add(dbList[i].id.toString());
+      list.add(dbList[i].activity.toString());
+      list.add(dbList[i].datetime.toString());
+
+      csvList.add(list);
+    }
+
+    String csv = const ListToCsvConverter().convert(csvList);
+
+    String dir = await ExtStorage.getExternalStoragePublicDirectory(
+        ExtStorage.DIRECTORY_DOWNLOADS);
+    print("dir $dir");
+    String file = "$dir";
+
+    File f = File(file + "/filename.csv");
+
+    f.writeAsString(csv);*/
   }
 }
 

@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:daylog/home_page.dart';
-import 'package:daylog/settings_page.dart';
 import 'package:flutter/material.dart';
 
 //DBServices dbservices = DBServices();
