@@ -73,7 +73,7 @@ class _ExportWidgetState extends State<ExportWidget> {
               child: const SizedBox(
                 width: double.infinity,
                 child: Center(
-                  child: Text('Export as CSV'),
+                  child: Text('Export logs as csv'),
                 ),
               ),
             ),

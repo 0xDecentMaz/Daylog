@@ -22,8 +22,8 @@ class _HistoryPageState extends State<HistoryPage> {
           icon: const Icon(Icons.arrow_back),
         ),
       ),
-      body: const Center(
-        child: SingleChildScrollView(child: ActivityLogTable()),
+      body: const SingleChildScrollView(
+        child: ActivityLogTable(),
       ),
     );
     //),
@@ -49,9 +49,11 @@ class _ActivityLogTableState extends State<ActivityLogTable> {
 
   @override
   Widget build(BuildContext context) {
-    return DataTable(
-      columns: _getColumns(),
-      rows: _getDataRows(),
+    return Center(
+      child: DataTable(
+        columns: _getColumns(),
+        rows: _getDataRows(),
+      ),
     );
   }
 

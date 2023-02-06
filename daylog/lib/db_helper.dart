@@ -106,9 +106,6 @@ class DatabaseHelper {
 
     String csv = const ListToCsvConverter().convert(csvList);
 
-    /*String dir = await ExtStorage.getExternalStoragePublicDirectory(
-        ExtStorage.DIRECTORY_DOWNLOADS);*/
-
     String dir = await getInternalDirectoryPath();
     String fullDir = join(dir, fileName);
     debugPrint(fullDir);
