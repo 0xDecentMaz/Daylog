@@ -18,8 +18,10 @@ class MyApp extends StatelessWidget {
       title: 'Logitall',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        //scaffoldBackgroundColor: Colors.amber,
+        colorScheme: const ColorScheme.dark(
+            primary: Colors.black12,
+            secondary: Colors.amber,
+            tertiary: Colors.white12),
       ),
       home: const HomePage(),
     );

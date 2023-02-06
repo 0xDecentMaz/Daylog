@@ -40,6 +40,9 @@ class _HomePageState extends State<HomePage> {
               return Column(
                 children: [
                   ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.amber),
+                    ),
                     onPressed: () {
                       _logActivity(activity);
                     },
@@ -65,7 +68,6 @@ class _HomePageState extends State<HomePage> {
           child: const Icon(Icons.add),
         ),
         bottomNavigationBar: NavigationBar(
-          //backgroundColor: Colors.lightBlue,
           destinations: const [
             NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
             NavigationDestination(icon: Icon(Icons.list), label: 'History'),
@@ -135,11 +137,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           actions: <Widget>[
-            TextButton(
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.amber),
+              ),
               onPressed: () => Navigator.pop(context, 'Cancel'),
               child: const Text('Cancel'),
             ),
-            TextButton(
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.amber),
+              ),
               child: const Text('Create'),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -163,11 +171,17 @@ class _HomePageState extends State<HomePage> {
             child: Text('Do you want to delete $activity ?'),
           ),
           actions: <Widget>[
-            TextButton(
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.amber),
+              ),
               onPressed: () => Navigator.pop(context, 'Cancel'),
               child: const Text('Cancel'),
             ),
-            TextButton(
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.amber),
+              ),
               child: const Text('Delete'),
               onPressed: () {
                 Navigator.of(context).pop();

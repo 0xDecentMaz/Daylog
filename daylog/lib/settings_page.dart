@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:request_permission/request_permission.dart';
 import 'db_helper.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -49,22 +48,23 @@ class _ExportWidgetState extends State<ExportWidget> {
     return Center(
       child: Column(
         children: [
+          TextField(
+            keyboardType: TextInputType.multiline,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+              labelText: "$exportResult\n\n$exportDir",
+            ),
+          ),
           ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.amber),
+            ),
             onPressed: () {
               exportToCSV();
             },
             child: const Text('Export to CSV'),
           ),
-          TextField(
-            decoration: InputDecoration(
-              labelText: exportResult,
-            ),
-          ),
-          TextField(
-            decoration: InputDecoration(
-              labelText: exportDir,
-            ),
-          )
         ],
       ),
     );

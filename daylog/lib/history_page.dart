@@ -24,7 +24,9 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
       body: const Padding(
         padding: EdgeInsets.all(10.0),
-        child: ActivityLogTable(),
+        child: SingleChildScrollView(
+          child: ActivityLogTable(),
+        ),
       ),
     );
   }
