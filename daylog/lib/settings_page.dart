@@ -24,7 +24,10 @@ class _SettingsPageState extends State<SettingsPage> {
           icon: const Icon(Icons.arrow_back),
         ),
       ),
-      body: const ExportWidget(),
+      body: const Padding(
+        padding: EdgeInsets.all(10.0),
+        child: ExportWidget(),
+      ),
     );
   }
 }
@@ -38,6 +41,8 @@ class ExportWidget extends StatefulWidget {
 
 class _ExportWidgetState extends State<ExportWidget> {
   DatabaseHelper dbservices = DatabaseHelper.instance;
+  String exportResult = "";
+  String exportDir = "";
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +50,21 @@ class _ExportWidgetState extends State<ExportWidget> {
       child: Column(
         children: [
           ElevatedButton(
-              onPressed: () {
-                exportToCSV();
-              },
-              child: const Text('Export to CSV'))
+            onPressed: () {
+              exportToCSV();
+            },
+            child: const Text('Export to CSV'),
+          ),
+          TextField(
+            decoration: InputDecoration(
+              labelText: exportResult,
+            ),
+          ),
+          TextField(
+            decoration: InputDecoration(
+              labelText: exportDir,
+            ),
+          )
         ],
       ),
     );
@@ -57,9 +73,12 @@ class _ExportWidgetState extends State<ExportWidget> {
   void exportToCSV() async {
     // get permission for external storage
     if (await Permission.manageExternalStorage.request().isGranted) {
-      debugPrint('Start export process');
-      await dbservices.exportToCSV();
-      debugPrint('Export completed');
+      exportResult = "Export started";
+      setState(() {});
+      String dir = await dbservices.exportToCSV();
+      exportResult = "Export complete";
+      exportDir = dir;
+      setState(() {});
     }
   }
 }

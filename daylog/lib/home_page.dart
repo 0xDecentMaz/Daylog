@@ -1,6 +1,5 @@
 import 'package:daylog/history_page.dart';
 import 'package:daylog/settings_page.dart';
-import 'package:daylog/navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'db_helper.dart';
 
@@ -32,23 +31,32 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           title: const Text('Logitall'),
         ),
-        body: ListView.builder(
-          itemCount: activityList.length,
-          itemBuilder: (_, index) {
-            var activity = activityList[index];
-            return Column(
-              children: [
-                ElevatedButton(
+        body: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView.builder(
+            itemCount: activityList.length,
+            itemBuilder: (_, index) {
+              var activity = activityList[index];
+              return Column(
+                children: [
+                  ElevatedButton(
                     onPressed: () {
                       _logActivity(activity);
                     },
                     onLongPress: () {
                       _deleteActivityDialog(activity);
                     },
-                    child: Text(activity))
-              ],
-            );
-          },
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Center(
+                        child: Text(activity),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -56,7 +64,28 @@ class _HomePageState extends State<HomePage> {
           },
           child: const Icon(Icons.add),
         ),
-        bottomNavigationBar: const NavBar(),
+        bottomNavigationBar: NavigationBar(
+          //backgroundColor: Colors.lightBlue,
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+            NavigationDestination(icon: Icon(Icons.list), label: 'History'),
+            NavigationDestination(
+                icon: Icon(Icons.settings), label: 'Settings'),
+          ],
+          onDestinationSelected: (int index) {
+            if (index != 0) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return pages[index];
+                  },
+                ),
+              );
+            } else {
+              //do nothing since already on homepage
+            }
+          },
+        ),
       ),
     );
   }

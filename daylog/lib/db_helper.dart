@@ -88,7 +88,7 @@ class DatabaseHelper {
     });
   }
 
-  Future<void> exportToCSV() async {
+  Future<String> exportToCSV() async {
     List<List<dynamic>> csvList = [];
     List<Log> dbList = await getActivityLog();
 
@@ -109,10 +109,13 @@ class DatabaseHelper {
 
     String dir = "/storage/emulated/0/Download/";
     debugPrint("dir $dir");
-
-    File csvFile = File("$dir/Logitall_output.csv");
+    String fileName = "Logitall_output.csv";
+    String fullDir = ("$dir$fileName");
+    File csvFile = File(fullDir);
 
     await csvFile.writeAsString(csv);
+
+    return fullDir;
   }
 }
 

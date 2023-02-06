@@ -22,7 +22,10 @@ class _HistoryPageState extends State<HistoryPage> {
           icon: const Icon(Icons.arrow_back),
         ),
       ),
-      body: const ActivityLogTable(),
+      body: const Padding(
+        padding: EdgeInsets.all(10.0),
+        child: ActivityLogTable(),
+      ),
     );
   }
 }
