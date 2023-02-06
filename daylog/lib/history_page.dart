@@ -22,13 +22,11 @@ class _HistoryPageState extends State<HistoryPage> {
           icon: const Icon(Icons.arrow_back),
         ),
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
-          child: ActivityLogTable(),
-        ),
+      body: const Center(
+        child: SingleChildScrollView(child: ActivityLogTable()),
       ),
     );
+    //),
   }
 }
 
@@ -64,7 +62,6 @@ class _ActivityLogTableState extends State<ActivityLogTable> {
   }
 
   List<DataRow> _getDataRows() {
-    //List<DataRow>
     List<DataRow> rows = [];
 
     for (int i = 0; i < activityLog.length; i++) {
@@ -72,13 +69,10 @@ class _ActivityLogTableState extends State<ActivityLogTable> {
         DataRow(
           cells: [
             DataCell(
-              Text(activityLog[i].id.toString()),
+              Text(activityLog[i].datetime.toString()),
             ),
             DataCell(
               Text(activityLog[i].activity.toString()),
-            ),
-            DataCell(
-              Text(activityLog[i].datetime.toString()),
             ),
           ],
         ),
@@ -90,9 +84,8 @@ class _ActivityLogTableState extends State<ActivityLogTable> {
 
   List<DataColumn> _getColumns() {
     return const [
-      DataColumn(label: Text('id')),
-      DataColumn(label: Text('activity')),
-      DataColumn(label: Text('datetime'))
+      DataColumn(label: Text('Datetime')),
+      DataColumn(label: Text('Activity'))
     ];
   }
 }

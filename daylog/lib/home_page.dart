@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           title: const Text('Logitall'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
           child: ListView.builder(
             itemCount: activityList.length,
             itemBuilder: (_, index) {

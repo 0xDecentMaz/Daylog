@@ -4,6 +4,8 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:csv/csv.dart';
 import 'dart:io';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 /*
 Many thanks to user manishdayma on github, it was of great help to read his implementation of 
@@ -88,7 +90,7 @@ class DatabaseHelper {
     });
   }
 
-  Future<String> exportToCSV() async {
+  Future<String> exportToCSV(String fileName) async {
     List<List<dynamic>> csvList = [];
     List<Log> dbList = await getActivityLog();
 
@@ -107,15 +109,22 @@ class DatabaseHelper {
     /*String dir = await ExtStorage.getExternalStoragePublicDirectory(
         ExtStorage.DIRECTORY_DOWNLOADS);*/
 
-    String dir = "/storage/emulated/0/Download/";
-    debugPrint("dir $dir");
-    String fileName = "Logitall_output.csv";
-    String fullDir = ("$dir$fileName");
+    String dir = await getInternalDirectoryPath();
+    String fullDir = join(dir, fileName);
+    debugPrint(fullDir);
     File csvFile = File(fullDir);
-
     await csvFile.writeAsString(csv);
 
+    List<XFile> xfiles = [];
+    xfiles.add(XFile(fullDir));
+    Share.shareXFiles(xfiles);
+
     return fullDir;
+  }
+
+  Future<String> getInternalDirectoryPath() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
   }
 }
 

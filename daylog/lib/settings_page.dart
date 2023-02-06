@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'db_helper.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -40,45 +39,61 @@ class ExportWidget extends StatefulWidget {
 
 class _ExportWidgetState extends State<ExportWidget> {
   DatabaseHelper dbservices = DatabaseHelper.instance;
-  String exportResult = "";
-  String exportDir = "";
+  String fileName = "";
+  String feedback = "";
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          TextField(
-            keyboardType: TextInputType.multiline,
-            maxLines: 3,
-            enabled: false,
-            decoration: InputDecoration(
-              labelText: "$exportResult\n\n$exportDir",
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+        child: Column(
+          children: [
+            TextField(
+              decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "File Name",
+                  suffix: Text('.csv')),
+              textAlign: TextAlign.center,
+              onChanged: (String value) {
+                fileName = value;
+              },
             ),
-          ),
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.amber),
+            Text(
+              feedback,
+              style: const TextStyle(color: Colors.red),
             ),
-            onPressed: () {
-              exportToCSV();
-            },
-            child: const Text('Export to CSV'),
-          ),
-        ],
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.amber),
+              ),
+              onPressed: () {
+                exportToCSV();
+              },
+              child: const SizedBox(
+                width: double.infinity,
+                child: Center(
+                  child: Text('Export as CSV'),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   void exportToCSV() async {
-    // get permission for external storage
-    if (await Permission.manageExternalStorage.request().isGranted) {
-      exportResult = "Export started";
-      setState(() {});
-      String dir = await dbservices.exportToCSV();
-      exportResult = "Export complete";
-      exportDir = dir;
-      setState(() {});
+    debugPrint(fileName);
+    if (fileName.isEmpty) {
+      feedback = "Enter a file name";
+    } else if (fileName.contains(".")) {
+      feedback = "Re-enter file name without extensions";
+    } else {
+      feedback = "";
+      await dbservices.exportToCSV("$fileName.csv");
     }
+
+    setState(() {});
   }
 }
