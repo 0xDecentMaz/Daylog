@@ -3,7 +3,7 @@
 #### Video Demo:  https://www.youtube.com/watch?v=ZrwGCcIHxFQ
 #### Google play store: https://play.google.com/store/apps/details?id=decentmaz.android.logitall
 
-#### Description:
+### Description:
 
 Transform the way you track your daily activities with our easy-to-use app. Create and log your activities easily with just a few clicks.  
   
@@ -20,7 +20,7 @@ We are constantly working to improve our app and welcome any suggestions you may
 Download now and keep track of your daily tasks!
 
 
-#### Detailed description:
+### Detailed description:
 
 Logitall is a mobile app built in Dart using the Flutter framework, and it is designed specifically for Android devices. The app was created as the final project for CS50x, a well-known computer science course.
 
@@ -33,12 +33,12 @@ In addition to viewing their activity log, users can also export their data as a
 
 Overall, Logitall is a user-friendly and intuitive app that helps users track and manage their daily activities.
 
-#### Sources: 
+### Sources: 
 **Database helper:** Many thanks to user manishdayma on GitHub, whose implementation of a database helper was of great help. You can find it at: [https://github.com/manishdayma/flutter_sqflite_crud/blob/main/lib/db_manager.dart](https://github.com/manishdayma/flutter_sqflite_crud/blob/main/lib/db_manager.dart)
 
 **Formatting:** This README file and the Google Play app description were generated with the help of OpenAI's ChatGPT language model. It was a great tool to use!
 
-#### Future updates:
+### Future updates:
 
 Here are some features that are planned for future updates:
 
